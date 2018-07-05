@@ -119,7 +119,7 @@ def sum_s_list(s1, s2):
     if s1.get_length() != s2.get_length():
         return print("lists of different lengths")
     def iter(node_1, node_2, acc):
-        if node_1 is None and node_2 is None:
+        if node_1 is None:
             return acc
         acc.append(node_1.value + node_2.value)
         return iter(node_1.next, node_2.next, acc) 
