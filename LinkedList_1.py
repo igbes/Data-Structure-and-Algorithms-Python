@@ -11,7 +11,6 @@ class LinkedList:
             self.head = item
         else:
             self.tail.next = item
-            #print(self.head.next.value)####
         self.tail = item
     def print_all_nodes(self):
         node = self.head
@@ -25,16 +24,6 @@ class LinkedList:
                 return node
             node = node.next
         return None
-    def find_2(self, val):
-        # Поиск одного узла по значению (рекурсивно)
-        node = self.head
-        def iter(node):
-            if node is None:
-                return None
-            if node.value == val:
-                return node
-            return iter(node.next)
-        return iter(node)
     # 1.1
     def remove(self, item): 
         # Удаление одного узла по значению
@@ -101,7 +90,44 @@ class LinkedList:
             return iter(node.next)    
         return iter(self.head)
     
-            
+# 1.7
+def sum_s_list(s1, s2):
+    if s1.get_length() != s2.get_length():
+        return print("lists of different lengths")
+    def iter(node_1, node_2, acc):
+        if node_1 is None:
+            return acc
+        acc.append(node_1.value + node_2.value)
+        return iter(node_1.next, node_2.next, acc) 
+    return iter(s1.head, s2.head, [] )
+
+def test_1():
+    s_list = LinkedList()
+    s_list.add_in_tail(Node(12))
+    s_list.add_in_tail(Node(55))
+    s_list.add_in_tail(Node(128))
+    s_list.add_in_tail(Node(55))    
+    s_list.remove(12)
+    
+def test_2():
+    s_list = LinkedList()
+    s_list.add_in_tail(Node(12))
+    s_list.add_in_tail(Node(55))
+    s_list.add_in_tail(Node(128))
+    s_list.add_in_tail(Node(55))    
+    s_list.remove(55)
+def test_3():
+    s_list = LinkedList()
+    s_list.add_in_tail(Node(128))
+    s_list.add_in_tail(Node(55))
+    s_list.remove(128)
+    if s_list.head.value != 55:
+        print("TEST 3 ERROR", list.head.value)
+test_1()
+test_2()
+test_2()
+
+"""
 s_list = LinkedList()
 s_list.add_in_tail(Node(12))
 s_list.add_in_tail(Node(55))
@@ -113,23 +139,9 @@ s_list_2.add_in_tail(Node(120))
 s_list_2.add_in_tail(Node(550))
 s_list_2.add_in_tail(Node(1280))
 s_list_2.add_in_tail(Node(550))
-
-# 1.7
-def sum_s_list(s1, s2):
-    if s1.get_length() != s2.get_length():
-        return print("lists of different lengths")
-    def iter(node_1, node_2, acc):
-        if node_1 is None:
-            return acc
-        acc.append(node_1.value + node_2.value)
-        return iter(node_1.next, node_2.next, acc) 
-    return iter(s1.head, s2.head, [] )
-      
-print(sum_s_list(s_list, s_list_2))
-#print(Node(12).next.value)
-
+"""
+#print(sum_s_list(s_list, s_list_2))
 #s_list.print_all_nodes()
-#print(s_list.find_2(55).value)
 #s_list.remove_one()
 #s_list.print_all_nodes()
 #s_list.remove(12)
