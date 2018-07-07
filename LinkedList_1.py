@@ -30,7 +30,7 @@ class LinkedList:
         node = self.head
         if self.head.value == item:
             self.head = self.head.next
-            #return
+            return
         while node is not None:
             if node.next == None:
                 return #print("value is missing")
@@ -49,7 +49,7 @@ class LinkedList:
                 return 
             if node.next.value == item:
                 node.next = node.next.next
-                return
+                #return
             node = node.next    
     #1.3    
     def clean(self):
@@ -101,53 +101,108 @@ def sum_s_list(s1, s2):
         return iter(node_1.next, node_2.next, acc) 
     return iter(s1.head, s2.head, [] )
 
-def test_1():
-    s_list = LinkedList()
-    s_list.add_in_tail(Node(12))
-    s_list.add_in_tail(Node(55))
-    s_list.add_in_tail(Node(128))
-    s_list.add_in_tail(Node(55))    
-    s_list.remove(12)
+def get_list_nodes(item):
+    # Получить список узлов (вспомогательная функция)
+    def iter(node, acc):
+        if node is None:
+            return acc
+        acc.append(node.value)
+        return iter(node.next, acc)    
+    return iter(item.head, [])    
+
+def test_remove():
+    s_list_test_1 = LinkedList()
+    s_list_test_1.add_in_tail(Node(12))
+    s_list_test_1.add_in_tail(Node(38))
+    s_list_test_1.add_in_tail(Node(12))
+    s_list_test_1.add_in_tail(Node(55))
+    s_list_test_1.remove(12)
+    if get_list_nodes(s_list_test_1) == [38, 12, 55]:
+        print("test remove(item) is OK")
+    else:
+        print("test remove(item) is FAIL")
+   
+def test_remove_all_value():
+    s_list_test_2 = LinkedList()
+    s_list_test_2.add_in_tail(Node(12))
+    s_list_test_2.add_in_tail(Node(38))
+    s_list_test_2.add_in_tail(Node(12))
+    s_list_test_2.add_in_tail(Node(55))
+    s_list_test_2.remove_all_value(12)
+    if get_list_nodes(s_list_test_2) == [38, 55]:
+        print("test_remove_all_value(item) is OK")
+    else:    
+        print("test_remove_all_value(item) is FAIL")
     
-def test_2():
-    s_list = LinkedList()
-    s_list.add_in_tail(Node(12))
-    s_list.add_in_tail(Node(55))
-    s_list.add_in_tail(Node(128))
-    s_list.add_in_tail(Node(55))    
-    s_list.remove(55)
-def test_3():
-    s_list = LinkedList()
-    s_list.add_in_tail(Node(128))
-    s_list.add_in_tail(Node(55))
-    s_list.remove(128)
-    if s_list.head.value != 55:
-        print("TEST 3 ERROR", list.head.value)
-test_1()
-test_2()
-test_2()
+def test_clean():
+    s_list_test_3 = LinkedList()
+    s_list_test_3.add_in_tail(Node(12))
+    s_list_test_3.add_in_tail(Node(38))
+    s_list_test_3.add_in_tail(Node(12))
+    s_list_test_3.add_in_tail(Node(55))
+    s_list_test_3.clean()
+    if get_list_nodes(s_list_test_3) == [None]:
+        print("test_clean() is OK")
+    else:    
+        print("test_clean() is FAIL")
 
-"""
-s_list = LinkedList()
-s_list.add_in_tail(Node(12))
-s_list.add_in_tail(Node(55))
-s_list.add_in_tail(Node(128))
-s_list.add_in_tail(Node(55))
+def test_find_all_nodes():
+    s_list_test_4 = LinkedList()
+    s_list_test_4.add_in_tail(Node(12))
+    s_list_test_4.add_in_tail(Node(38))
+    s_list_test_4.add_in_tail(Node(12))
+    s_list_test_4.add_in_tail(Node(55))
+    if s_list_test_4.find_all_nodes(12) == [12, 12]:
+        print("test find_all_nodes(item) is OK")
+    else:
+        print("test find_all_nodes(item) is FAIL")
 
-s_list_2 = LinkedList()
-s_list_2.add_in_tail(Node(120))
-s_list_2.add_in_tail(Node(550))
-s_list_2.add_in_tail(Node(1280))
-s_list_2.add_in_tail(Node(550))
-"""
-#print(sum_s_list(s_list, s_list_2))
-#s_list.print_all_nodes()
-#s_list.remove_one()
-#s_list.print_all_nodes()
-#s_list.remove(12)
-#s_list.remove_all_value(12)
-#s_list.print_all_nodes()
-#print(s_list.get_length())
-#s_list.print_all_nodes()
-#s_list.find_all_nodes(55)
-#print(s_list.find_all_nodes(55))
+def test_get_length():
+    s_list_test_5 = LinkedList()
+    s_list_test_5.add_in_tail(Node(12))
+    s_list_test_5.add_in_tail(Node(38))
+    s_list_test_5.add_in_tail(Node(12))
+    s_list_test_5.add_in_tail(Node(55))
+    
+    if s_list_test_5.get_length() == 4:
+        print("test get_length(item) is OK")
+    else:
+        print("test get_length(item) is FAIL")
+
+def test_insert():
+    s_list_test_6 = LinkedList()
+    s_list_test_6.add_in_tail(Node(12))
+    s_list_test_6.add_in_tail(Node(38))
+    s_list_test_6.add_in_tail(Node(12))
+    s_list_test_6.add_in_tail(Node(55))
+    s_list_test_6.insert(38, 73)
+    if get_list_nodes(s_list_test_6) == [12, 38, 73, 12, 55]:
+        print("test insert(item_1, item_2) is OK")
+    else:
+        print("test remove(item_1, item_2) is FAIL")
+        
+def test_sum_s_list():
+    s_list_test_7 = LinkedList()
+    s_list_test_7.add_in_tail(Node(12))
+    s_list_test_7.add_in_tail(Node(38))
+    s_list_test_7.add_in_tail(Node(12))
+    s_list_test_7.add_in_tail(Node(55))
+    s_list_test_8 = LinkedList()
+    s_list_test_8.add_in_tail(Node(120))
+    s_list_test_8.add_in_tail(Node(550))
+    s_list_test_8.add_in_tail(Node(1280))
+    s_list_test_8.add_in_tail(Node(550))    
+    
+    if sum_s_list(s_list_test_7, s_list_test_8) == [132, 588, 1292, 605]:
+        print("test sum_s_list(item_1, item_2) is OK")
+    else:
+        print("test sum_s_list(item_1, item_2) is FAIL")
+
+test_remove()
+test_remove_all_value()  
+test_clean()
+test_find_all_nodes()
+test_get_length()
+test_insert()    
+test_sum_s_list()        
+        
