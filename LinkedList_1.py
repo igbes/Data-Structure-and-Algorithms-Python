@@ -43,11 +43,17 @@ class LinkedList:
     # 1.2
     
     def remove_all_value(self, item):
-        # Удаление всех узлов по значению
         node = self.head
+        while self.head.value == item:
+            self.head = self.head.next
+            node = node.next
         while node is not None:
-            if node.value == item:
-                self.remove(item)
+            if node.next == None:
+                return 
+            while node.next.value == item:
+                node.next = node.next.next
+                if node.next == None:
+                    return                 
             node = node.next
            
     #1.3    
@@ -129,12 +135,14 @@ def test_remove_all_value():
     s_list_test_2.add_in_tail(Node(12))
     s_list_test_2.add_in_tail(Node(12))
     s_list_test_2.add_in_tail(Node(73))
+    s_list_test_2.add_in_tail(Node(12))
+    s_list_test_2.add_in_tail(Node(12))
     
     s_list_test_2.remove_all_value(12)
     if get_list_nodes(s_list_test_2) == [73, 73]:
         print("test remove_all_value(item) is OK")
     else:
-        print("test remove_all_value(item) is FAIL")    
+        print("test remove_all_value(item) is FAIL")     
  
 def test_clean():
     s_list_test_3 = LinkedList()
