@@ -24,38 +24,27 @@ class LinkedList:
                 return node
             node = node.next
         return None
-    # 1.1
     
-    def remove(self, item): 
-        # Удаление одного узла по значению
-        node = self.head
-        if self.head.value == item:
-            self.head = self.head.next
-            return
-        while node is not None:
-            if node.next == None:
-                return 
-            if node.next.value == item:
-                node.next = node.next.next
-                return
-            node = node.next  
-           
-    # 1.2
+    # 1.1 - 1.2
     
-    def remove_all_value(self, item):
+    def remove(self, item, boolItem = True): 
+        # Удаление одного или всех узлов по значению
+        # По умолчанию удаляет все узлы по значению item
         node = self.head
-        while self.head.value == item:
-            self.head = self.head.next
-            node = node.next
+        preNode = Node(None)
         while node is not None:
-            if node.next == None:
-                return 
-            while node.next.value == item:
-                node.next = node.next.next
-                if node.next == None:
-                    return                 
+            if node == self.head and node.value == item:
+                self.head = node.next
+                if boolItem == False:
+                    return
+            elif node.value != item:
+                preNode = node
+            else:
+                preNode.next = node.next
+                if boolItem == False:
+                    return
             node = node.next
-           
+         
     #1.3    
     def clean(self):
         #Очистка списка
@@ -117,33 +106,26 @@ def get_list_nodes(item):
 
 def test_remove():
     s_list_test_1 = LinkedList()
-    s_list_test_1.add_in_tail(Node(73))
-    s_list_test_1.add_in_tail(Node(73))
-    s_list_test_1.add_in_tail(Node(12))
-    s_list_test_1.add_in_tail(Node(12))
     
+    s_list_test_1.add_in_tail(Node(12))
+    s_list_test_1.add_in_tail(Node(73))
+    s_list_test_1.add_in_tail(Node(73))
+    s_list_test_1.add_in_tail(Node(12))
+    s_list_test_1.add_in_tail(Node(73))
+    s_list_test_1.add_in_tail(Node(73))
+    
+    s_list_test_1.remove(12, False)
+    if get_list_nodes(s_list_test_1) == [73, 73, 12, 73, 73]:
+        print("test remove(item, False) is OK")
+    else:
+        print("test remove(item, False) is FAIL")
+        
     s_list_test_1.remove(12)
-    if get_list_nodes(s_list_test_1) == [73, 73, 12]:
-        print("test remove(item) is OK")
+    if get_list_nodes(s_list_test_1) == [73, 73, 73, 73]:
+        print("test remove(item, True) is OK")
     else:
-        print("test remove(item) is FAIL")
+        print("test remove(item, True) is FAIL")    
   
-def test_remove_all_value():
-    s_list_test_2 = LinkedList()
-    s_list_test_2.add_in_tail(Node(12))
-    s_list_test_2.add_in_tail(Node(73))
-    s_list_test_2.add_in_tail(Node(12))
-    s_list_test_2.add_in_tail(Node(12))
-    s_list_test_2.add_in_tail(Node(73))
-    s_list_test_2.add_in_tail(Node(12))
-    s_list_test_2.add_in_tail(Node(12))
-    
-    s_list_test_2.remove_all_value(12)
-    if get_list_nodes(s_list_test_2) == [73, 73]:
-        print("test remove_all_value(item) is OK")
-    else:
-        print("test remove_all_value(item) is FAIL")     
- 
 def test_clean():
     s_list_test_3 = LinkedList()
     s_list_test_3.add_in_tail(Node(12))
@@ -209,7 +191,6 @@ def test_sum_s_list():
         print("test sum_s_list(item_1, item_2) is FAIL")
 
 test_remove()
-test_remove_all_value()  
 test_clean()
 test_find_all_nodes()
 test_get_length()
