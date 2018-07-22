@@ -43,14 +43,8 @@ class OrderList:
         self.head.prev = newNode
         self.head = newNode
         
-    def is_biggest(self, item, item_1):
+    def is_biggest(self, itm, itm_1):
         # Сравнение элементов
-        if type(item) == str and type(item_1) == str:
-            itm = len(item.strip())
-            itm_1 = len(item_1.strip())
-        else:
-            itm = item
-            itm_1 = item_1
         if self.increase:
             if itm >= itm_1:
                 return True
@@ -121,14 +115,14 @@ class TestOrderList(unittest.TestCase):
         self.o_list_1._add_in_tail(Node2(2))  
         
         self.o_list_str = OrderList()
-        self.o_list_str._add_in_tail(Node2("aa"))
-        self.o_list_str._add_in_tail(Node2("bbb"))
-        self.o_list_str._add_in_tail(Node2("ccccc"))        
+        self.o_list_str._add_in_tail(Node2("ab"))
+        self.o_list_str._add_in_tail(Node2("ad"))
+        self.o_list_str._add_in_tail(Node2("ae"))        
         
         self.o_list_str_1 = OrderList(False)
-        self.o_list_str_1._add_in_tail(Node2("aaaaa"))
-        self.o_list_str_1._add_in_tail(Node2("bbb"))
-        self.o_list_str_1._add_in_tail(Node2("cc"))        
+        self.o_list_str_1._add_in_tail(Node2("ae"))
+        self.o_list_str_1._add_in_tail(Node2("ad"))
+        self.o_list_str_1._add_in_tail(Node2("ab"))        
     
     # numbers
         
@@ -180,39 +174,39 @@ class TestOrderList(unittest.TestCase):
      
     def test_insert_in_middle_str(self):
         # Вставка узла в середину списка
-        self.o_list_str.insert("ffff")
+        self.o_list_str.insert("ac")
         res = self.o_list_str.get_list_nodes(self.o_list_str)
-        self.assertEqual(res, ["aa", "bbb", "ffff", "ccccc"])
+        self.assertEqual(res, ["ab", "ac", "ad", "ae"])
     
     def test_insert_in_middle_str_1(self):
         # Вставка узла в середину списка
-        self.o_list_str_1.insert("ffff")
+        self.o_list_str_1.insert("ac")
         res = self.o_list_str_1.get_list_nodes(self.o_list_str_1)
-        self.assertEqual(res, ["aaaaa", "ffff", "bbb", "cc"])    
+        self.assertEqual(res, ["ae", "ad", "ac", "ab"])    
         
     def test_insert_in_head_str(self):
         # Вставка узла в середину списка
-        self.o_list_str.insert("f")
+        self.o_list_str.insert("aa")
         res = self.o_list_str.get_list_nodes(self.o_list_str)
-        self.assertEqual(res, ["f", "aa", "bbb", "ccccc"])     
+        self.assertEqual(res, ["aa", "ab", "ad", "ae"])     
     
     def test_insert_in_head_str_1(self):
         # Вставка узла в середину списка
-        self.o_list_str_1.insert("ffffff")
+        self.o_list_str_1.insert("aa")
         res = self.o_list_str_1.get_list_nodes(self.o_list_str_1)
-        self.assertEqual(res, ['ffffff', 'aaaaa', 'bbb', 'cc'])
+        self.assertEqual(res, ['ae', 'ad', 'ab', 'aa'])
     
     def test_insert_in_tail_str(self):
         # Вставка узла в середину списка
-        self.o_list_str.insert("ffffff")
+        self.o_list_str.insert("af")
         res = self.o_list_str.get_list_nodes(self.o_list_str)
-        self.assertEqual(res, ["aa", "bbb", "ccccc", "ffffff"])
+        self.assertEqual(res, ["ab", "ad", "ae", "af"])
         
     def test_insert_in_tail_str_1(self):
         # Вставка узла в середину списка
-        self.o_list_str_1.insert("f")
+        self.o_list_str_1.insert("af")
         res = self.o_list_str_1.get_list_nodes(self.o_list_str_1)
-        self.assertEqual(res, ["aaaaa", "bbb", "cc", "f"])    
+        self.assertEqual(res, ["af", "ae", "ad", "ab"])    
     
     # find
         
@@ -221,7 +215,7 @@ class TestOrderList(unittest.TestCase):
         
     def test_find_str(self):
         #self.o_list.find(item).value
-        self.assertEqual(self.o_list_str.find("bbb"), "bbb")        
+        self.assertEqual(self.o_list_str.find("ad"), "ad")        
         
 if __name__ == '__main__':
     unittest.main()        
