@@ -12,31 +12,27 @@ class HashTable:
             sum_code += ord(simbol)
         return sum_code % self.size
     
-    def seek_slot(self, value):
+    def seek_slot(self, value, find = False):
+        # Режим поиска элемента по значению - find = True
+        if find == False:
+            slot_value = None
+        else:
+            slot_value = value
+            
         slot = self.hash_fun(value)
-        for i in range(slot, slot + self.step + 1):
-            if self.slots[slot] == None:
-                #self.slots[slot] = value
-                return slot
-            slot += 1
+        for i in range(0, self.size * self.step):
             if slot > self.size - 1:
-                slot = 0
-              
+                slot = slot - self.size
+            if self.slots[slot] == slot_value:
+                return slot            
+            slot += self.step
+     
     def put(self, value):
         slot_number = self.seek_slot(value)
         if slot_number != None:
             self.slots[slot_number] = value
             return
-        
-    def find(self, value):
-        slot = self.hash_fun(value)
-        for i in range(slot, slot + self.step + 1):
-            if self.slots[slot] == value:
-                return slot
-            slot += 1
-            if slot > self.size - 1:
-                slot = 0
-        
+                   
     def show_hashtable(self):
         # Показывает хеш-таблицу в виде массива (вспомогательная функция)
         return self.slots
@@ -56,7 +52,7 @@ class TestHashTable(unittest.TestCase):
     
     def test_put(self):
         self.assertEqual(self.h_table.show_hashtable(), 
-                         ['eD', None, None, None, None, None, None, None, None, None, None, 'AA', 'Bc', None, None, None, 'dE'])
+            [None, None, 'eD', None, None, None, None, None, None, None, None, 'AA', 'Bc', None, None, None, 'dE'])
        
     def test_seek_slot(self):
         self.h_table = HashTable(4, 3)
@@ -66,10 +62,9 @@ class TestHashTable(unittest.TestCase):
         self.h_table.put("eD")        
         self.assertEqual(self.h_table.seek_slot("DD"), None) 
         
-    def test_find(self):
-        self.assertEqual(self.h_table.find("dE"), 16)
-        self.assertEqual(self.h_table.find("eD"), 0)
-        
+        # Проверка поиска элемента по значению:
+        self.assertEqual(self.h_table.seek_slot("dE", True), 0)
+        self.assertEqual(self.h_table.seek_slot("eD", True), 3)
+        self.assertEqual(self.h_table.seek_slot("DD", True), None)
 if __name__ == '__main__':
     unittest.main()        
-    
