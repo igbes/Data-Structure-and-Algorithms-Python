@@ -36,11 +36,11 @@ class Dict:
             return
                    
     def show_table_keys(self):
-        # Показывает хеш-таблицу в виде массива (вспомогательная функция)
+        # Показывает массив ключей (вспомогательная функция)
         return self.slots
 
     def show_table_values(self):
-        # Показывает хеш-таблицу в виде массива (вспомогат    ельная функция)
+        # Показывает массив значений (вспомогательная функция)
         return self.values
 
 class TestDict(unittest.TestCase):
