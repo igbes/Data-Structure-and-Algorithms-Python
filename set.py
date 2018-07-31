@@ -117,6 +117,7 @@ class TestPowerSet(unittest.TestCase):
   
     def test_put(self):
         self.set_1.put("Bc")
+        self.set_1.put("Bc")
         self.assertEqual(self.set_1.show_hashtable(), ['Bc', 'dE', None, 'eD', 'AA', None, None])
        
      
