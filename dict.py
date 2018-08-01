@@ -12,21 +12,26 @@ class Dict:
         for simbol in value:
             sum_code += ord(simbol)
         return sum_code % self.size
-    
-    def is_key(self, key, find_key = False):
-        # Режим поиска свободного слота для размещения элемента - find_key = false
-        # Режим поиска элемента по значению - find_key = True
-        if find_key == False:
-            slot_value = None
-        else:
-            slot_value = key        
+       
+    def is_key(self, key):
         slot = self.hash_fun(key)
         for i in range(0, self.size * self.step):
             if slot > self.size - 1:
                 slot = slot - self.size
-            if self.slots[slot] == slot_value:
+            if self.slots[slot] == None:
                 return slot            
-            slot += self.step       
+            slot += self.step 
+            
+    def find(self, key):
+        slot = self.hash_fun(key)
+        for i in range(0, self.size * self.step):
+            if slot > self.size - 1:
+                slot = slot - self.size
+            if self.slots[slot] == None:
+                return                 
+            if self.slots[slot] == key:
+                return slot            
+            slot += self.step                
      
     def put(self, key, value):
         slot_number = self.is_key(key)
@@ -71,10 +76,11 @@ class TestDict(unittest.TestCase):
         self.my_dict.put("eD", "item 4")      
         self.assertEqual(self.my_dict.is_key("DD"), None) 
         
+    def test_find(self):
         # Проверка поиска ключа по значению:
-        self.assertEqual(self.my_dict.is_key("dE", True), 0)
-        self.assertEqual(self.my_dict.is_key("eD", True), 3)
-        self.assertEqual(self.my_dict.is_key("DD", True), None)
+        self.assertEqual(self.my_dict.find("dE"), 16)
+        self.assertEqual(self.my_dict.find("eD"), 2)
+        self.assertEqual(self.my_dict.find("DD"), None)
         
 if __name__ == '__main__':
     unittest.main()        
