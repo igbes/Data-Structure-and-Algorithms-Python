@@ -121,6 +121,8 @@ class TestLinkedList(unittest.TestCase):
         self.assertEqual(next(self.lst), 11) 
         self.assertEqual(next(self.lst), 77) 
         self.assertEqual(next(self.lst), 58) 
+        with self.assertRaises(StopIteration): 
+            next(self.lst)
         
     def test_first(self):
         self.lst.first()
@@ -131,16 +133,7 @@ class TestLinkedList(unittest.TestCase):
         self.assertEqual(next(self.lst), 77) 
         self.assertEqual(next(self.lst), 58) 
     
-    """def test_exeption(self):
-        
-        next(self.lst)
-        next(self.lst)
-        next(self.lst)
-        next(self.lst)
-        next(self.lst)
-        next(self.lst)
-        self.assertRaises(StopIteration, next(self.lst))"""
-        
-    
 if __name__ == '__main__':
     unittest.main()
+    
+with self.assertRaises(StopIteration): next(self.lst)    
