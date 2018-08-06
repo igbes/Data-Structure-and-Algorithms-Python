@@ -136,4 +136,4 @@ class TestLinkedList(unittest.TestCase):
 if __name__ == '__main__':
     unittest.main()
     
-with self.assertRaises(StopIteration): next(self.lst)    
+  
