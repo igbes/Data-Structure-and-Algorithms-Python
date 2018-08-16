@@ -52,12 +52,13 @@ class SimpleTree:
             self.leaf_number += 1 
         return lst
     
-    def next_node(self):
-        # обход дерева с помощью генератора
-        for i in self.iter_tree(self.root, []):
-            #print(i.value)
-            yield i.value
-        yield 
+    def iterator(self):
+        # Возвращает итератор списка узлов дерева
+        return iter(self.iter_tree(self.root, []))
+    
+    def next_node(self, iterator):
+        # Выводит узлы дерева по одному
+        return next(iterator, TreeNode(None, None)).value         
         
     def find(self, item):
         # Поиск узла по значению
@@ -96,7 +97,6 @@ class SimpleTree:
                             i.parent = j
                             j.child.append(i)
                             break
-        
 
 class TestSimpleTree(unittest.TestCase):
     
@@ -117,13 +117,14 @@ class TestSimpleTree(unittest.TestCase):
         self.assertEqual(self.mtr.leaf_number, 4)
         
     def test_next_node(self):
-        self.n = self.mtr.next_node()
-        self.assertEqual(next(self.n), 10)    
-        self.assertEqual(next(self.n), 5) 
-        self.assertEqual(next(self.n), 12)
-        self.assertEqual(next(self.n), 37)
-        self.assertEqual(next(self.n), 7) 
-        self.assertEqual(next(self.n), 8)
+        self.it = self.mtr.iterator()
+        self.assertEqual(self.mtr.next_node(self.it), 10)    
+        self.assertEqual(self.mtr.next_node(self.it), 5) 
+        self.assertEqual(self.mtr.next_node(self.it), 12)
+        self.assertEqual(self.mtr.next_node(self.it), 37)
+        self.assertEqual(self.mtr.next_node(self.it), 7) 
+        self.assertEqual(self.mtr.next_node(self.it), 8)
+        self.assertEqual(self.mtr.next_node(self.it), None)
         
     def test_find(self):
         self.mtr.add_child(TreeNode(self.mtr.current, 5))
