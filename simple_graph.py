@@ -82,7 +82,8 @@ class TestSimpleGraph(unittest.TestCase):
         self.my_graph.add_del_edge('B', 'E')
         self.my_graph.add_del_edge('C', 'D')
         self.my_graph.add_del_edge('D', 'D')
-        self.my_graph.add_del_edge('D', 'E')      
+        self.my_graph.add_del_edge('D', 'E') 
+        
         self.assertEqual(self.my_graph.m_adjacency, 
                          [[0, 1, 1, 1, 0], [1, 0, 0, 1, 1], [1, 0, 0, 1, 0], [1, 1, 1, 1, 1], [0, 1, 0, 1, 0]])
         """
@@ -102,14 +103,15 @@ class TestSimpleGraph(unittest.TestCase):
         """
         Проверка удаления узла со всеми рёбрами
         """
-        self.my_graph.add_del_edge('A', 'B', 1)
-        self.my_graph.add_del_edge('A', 'C', 1)
-        self.my_graph.add_del_edge('A', 'D', 1)
-        self.my_graph.add_del_edge('B', 'D', 1)
-        self.my_graph.add_del_edge('B', 'E', 1)
-        self.my_graph.add_del_edge('C', 'D', 1)
-        self.my_graph.add_del_edge('D', 'D', 1)
-        self.my_graph.add_del_edge('D', 'E', 1)          
+        self.my_graph.add_del_edge('A', 'B')
+        self.my_graph.add_del_edge('A', 'C')
+        self.my_graph.add_del_edge('A', 'D')
+        self.my_graph.add_del_edge('B', 'D')
+        self.my_graph.add_del_edge('B', 'E')
+        self.my_graph.add_del_edge('C', 'D')
+        self.my_graph.add_del_edge('D', 'D')
+        self.my_graph.add_del_edge('D', 'E')
+        
         self.my_graph.del_vertex_with_edge('E')
         self.assertEqual(self.my_graph.list_vertex, ['A', 'B', 'C', 'D', None])
         self.assertEqual(self.my_graph.m_adjacency, 
