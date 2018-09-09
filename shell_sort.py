@@ -1,9 +1,8 @@
 import unittest
 
 def shell_sort(lst):
-    def iter(step):
-        if step < 1:
-            return lst
+    
+    def insert_sort_step(step):
         for index in range(len(lst)):
             for i in range(step + index, len(lst), step):
                 j = i 
@@ -14,8 +13,15 @@ def shell_sort(lst):
                     else:
                         break
                 if j + step >= len(lst):
-                    return iter(step // 2)            
-    return iter(len(lst) // 2) 
+                    return lst 
+                
+    def result_sort(gap):
+        while gap:
+            insert_sort_step(gap)
+            gap //= 2
+        return lst
+    
+    return result_sort(len(lst) // 2)  
 
 
 class TestShellSort(unittest.TestCase):
