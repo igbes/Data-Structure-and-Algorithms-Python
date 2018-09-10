@@ -14,14 +14,24 @@ def shell_sort(lst):
                         break
                 if j + step >= len(lst):
                     return lst 
+    
+    def sequens_knut():
+        """ Возвращает интервальную последовательность Кнута 
+        для заданного списка lst """
+        
+        l = []
+        n = 1
+        while n <= len(lst):
+            l.insert(0, n)
+            n = 3 * n + 1        
+        return l
                 
-    def result_sort(gap):
-        while gap:
-            insert_sort_step(gap)
-            gap //= 2
+    def result_sort():
+        for i in sequens_knut():
+            insert_sort_step(i)
         return lst
     
-    return result_sort(len(lst) // 2)  
+    return result_sort()
 
 
 class TestShellSort(unittest.TestCase):
@@ -33,8 +43,8 @@ class TestShellSort(unittest.TestCase):
         ls = [7, 6, 5, 4, 3, 2, 1]
         self.assertEqual(shell_sort(ls), [1, 2, 3, 4, 5, 6, 7])
         
-        ls = [7, 6, 4, 8, 9, 3, 2, 10, 5, 1]
-        self.assertEqual(shell_sort(ls), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+        ls = [7, 6, 4, 8, 9, 3, 2, 10, 5, 1, 15, 13, 14, 12, 11]
+        self.assertEqual(shell_sort(ls), [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15])
         
 if __name__ == '__main__':
     unittest.main()      
