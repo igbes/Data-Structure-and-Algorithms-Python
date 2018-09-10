@@ -37,9 +37,8 @@ def shell_sort(lst):
 class TestShellSort(unittest.TestCase):
     
     def test_insertion_sort_step_1(self):
-        """
-        Проверка сортировки Шелла:
-        """
+        """ Проверка сортировки Шелла: """
+        
         ls = [7, 6, 5, 4, 3, 2, 1]
         self.assertEqual(shell_sort(ls), [1, 2, 3, 4, 5, 6, 7])
         
