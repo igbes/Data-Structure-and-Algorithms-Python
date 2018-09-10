@@ -15,7 +15,7 @@ def shell_sort(lst):
                 if j + step >= len(lst):
                     return lst 
     
-    def sequens_knut():
+    def sequence_knut():
         """ Возвращает интервальную последовательность Кнута 
         для заданного списка lst """
         
@@ -27,7 +27,7 @@ def shell_sort(lst):
         return l
                 
     def result_sort():
-        for i in sequens_knut():
+        for i in sequence_knut():
             insert_sort_step(i)
         return lst
     
