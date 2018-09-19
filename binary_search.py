@@ -1,4 +1,4 @@
-import unittest, random
+import unittest
 
 def binary_search(ls, itm):
     
