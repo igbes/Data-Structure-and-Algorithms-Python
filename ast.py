@@ -2,6 +2,9 @@ import unittest
 
 def get_ast(math_str):
     
+    """Возвращает список токенов AST
+    """
+    
     def get_list(str):
         f = 0
         arr = []
