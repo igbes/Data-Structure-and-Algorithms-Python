@@ -23,7 +23,6 @@ def is_result(item):
     else:
         return False
     
-
 def get_result(st):
     """Возвращает список из двух элементов: 
     первым идет результат интерпретации, 
