@@ -1,4 +1,4 @@
-from collections import deque
+
 class Node2:
     def __init__(self, v):
         self.value = v

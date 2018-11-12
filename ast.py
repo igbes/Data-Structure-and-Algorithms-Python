@@ -104,6 +104,9 @@ class TestGetAst(unittest.TestCase):
     
     def test_get_ast(self):
         
+        st = "7+3"
+        self.assertEqual(get_ast(st), ['(', '7', '+', '3', ')', ])        
+        
         st = "7+3/25*(5-2)"
         self.assertEqual(get_ast(st), ['(', '7', '+', '(', '(', '3', '/', '25', ')', '*', '(', '5', '-', '2', ')', ')', ')', ]) 
         

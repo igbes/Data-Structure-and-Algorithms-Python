@@ -10,6 +10,7 @@ def get_tree_ast(str):
     new_lst = lst.copy()
     while len(new_lst) != 0:
         token = new_lst.pop(0)
+        #print(token)
         if token == '(':
             tree_ast.add_child(TreeNode(tree_ast.current, None))
             tree_ast.current = tree_ast.current.child[0]
@@ -20,14 +21,15 @@ def get_tree_ast(str):
             tree_ast.current = tree_ast.current.parent
         else:
             tree_ast.current.value = token
+            #print('value =', tree_ast.current.value)
+            #print('level =', tree_ast.current.level)             
             tree_ast.add_child(TreeNode(tree_ast.current, None))
             tree_ast.current = tree_ast.current.child[1]
+                       
     return tree_ast  
 
-
 class TestGetTreeAst(unittest.TestCase):
-    """Проверка визуального представления AST 
-    """
+    
     def test_get_tree_ast(self):
         self.str = '(3+(5-7))'
         self.ls = get_tree_ast(self.str)
@@ -37,5 +39,4 @@ class TestGetTreeAst(unittest.TestCase):
         self.assertEqual(self.lst.count_nodes(), ['*', '+', '7', '3', '-', '5', '2'])
         
 if __name__ == '__main__':
-    unittest.main()  
-   
+    unittest.main()    

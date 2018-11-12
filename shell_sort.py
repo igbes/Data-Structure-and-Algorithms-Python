@@ -16,6 +16,7 @@ def shell_sort(lst):
                     return lst 
     
     def sequence_knut():
+        
         """ Возвращает интервальную последовательность Кнута 
         для заданного списка lst """
         

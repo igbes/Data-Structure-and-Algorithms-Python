@@ -67,4 +67,4 @@ class TestHashTable(unittest.TestCase):
         self.assertEqual(self.h_table.seek_slot("eD", True), 3)
         self.assertEqual(self.h_table.seek_slot("DD", True), None)
 if __name__ == '__main__':
-    unittest.main()        
+    unittest.main()       

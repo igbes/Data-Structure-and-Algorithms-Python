@@ -25,8 +25,19 @@ class LinkedList:
             node = node.next
         return None
     
-    # 1.1 - 1.2
+    def __iter__(self):
+        return self
     
+    def __next__(self):
+        item = self.head
+        if item is not None:
+            return item
+        """while item.next != None:
+            yield item
+            item = item.next"""
+        
+    
+    # 1.1 - 1.2
     def remove(self, item, boolItem = True): 
         # Удаление одного или всех узлов по значению
         # По умолчанию удаляет все узлы по значению item
@@ -197,3 +208,12 @@ test_get_length()
 test_insert()    
 test_sum_s_list()        
         
+lst = LinkedList()
+lst.add_in_tail(Node(12))
+lst.add_in_tail(Node(14))
+lst.add_in_tail(Node(73))
+lst.add_in_tail(Node(11))
+lst.add_in_tail(Node(77))
+lst.add_in_tail(Node(58))
+
+print(next(lst))

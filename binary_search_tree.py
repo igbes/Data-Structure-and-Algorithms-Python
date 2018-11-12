@@ -10,9 +10,7 @@ class Tree2Node:
 class Tree2:
     def __init__(self):
         self.root = None
-        self.current = None
-        
-        
+           
     def add(self, item):
         """
         Добавление узла в дерево
@@ -37,8 +35,6 @@ class Tree2:
                     return 
                 else:       
                     return iter(node.right)                 
-                
-                return iter(node.right)
         return iter(self.root) 
     
     def count_nodes(self):
@@ -56,17 +52,18 @@ class Tree2:
     
     def find(self, item):
         """
-        Поиск заданного узла по значению. Поиск ведётся от корня дерева,
-        если значение найдено, возвращается 1, иначе - 0
+        Поиск заданного узла по значению. Поиск ведётся от корня дерева.
         """
         def iter(node):
             if item == node.key:
                 return node            
-            if not node.left and not node.right:
-                return 
             if item < node.key:
+                if not node.left:
+                    return
                 return iter(node.left)
             else:
+                if not node.right:
+                    return
                 return iter(node.right)
         return iter(self.root)
     def find_extremum(self, item, f = 1):
@@ -158,11 +155,12 @@ class TestTree2(unittest.TestCase):
         self.assertEqual(self.tree.count_nodes(), [8, 4, 2, 1, 3, 6, 5, 7, 12, 10, 9, 11, 14, 13, 15])  
         
     def test_tree_find(self):
-        # Проверка поиска елемента по ключу
+        # Проверка поиска элемента по ключу
         self.assertEqual(self.tree.find(12).key, 12)
         self.assertEqual(self.tree.find(25), None)
         
-    def test_find_extremum(self): 
+    def test_find_extremum(self):
+        # Проверка нахождения максимального или минимального значения
         self.assertEqual(self.tree.find_extremum(12).key, 15)        
         self.assertEqual(self.tree.find_extremum(6, 0).key, 5)
         self.assertEqual(self.tree.find_extremum(9).key, 9)
