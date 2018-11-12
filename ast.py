@@ -99,7 +99,6 @@ def get_ast(math_str):
         return iter(lst, [])
     return get_result_lst(math_str)
 
-
 class TestGetAst(unittest.TestCase):
     
     def test_get_ast(self):
