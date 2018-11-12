@@ -8,6 +8,7 @@ def get_tree_ast(str):
     lst = get_ast(str)
     tree_ast = SimpleTree(TreeNode(None, None))
     new_lst = lst.copy()
+    
     while len(new_lst) != 0:
         token = new_lst.pop(0)
         #print(token)
