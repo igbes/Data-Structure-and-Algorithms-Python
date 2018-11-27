@@ -1,6 +1,7 @@
 import unittest
 
 class HashTable:
+    
     def __init__(self, sz, stp):
         self.size = sz
         self.step = stp
