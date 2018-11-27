@@ -66,6 +66,7 @@ class Tree2:
                     return
                 return iter(node.right)
         return iter(self.root)
+    
     def find_extremum(self, item, f = 1):
         """
         Поиск максимального или минимального значения относительно заданного узла,
