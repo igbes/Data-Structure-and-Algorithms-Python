@@ -38,6 +38,9 @@ class BinaryWeldedTree:
         # в случае успешности flag = 1
         self.flag = 0 
         
+        # Содержит узел, установленный функцией get_node()
+        self.current = None
+        
     def getBWT(self, symmetry = True):
         
         self.visual_form_up = '1\n'
@@ -237,12 +240,89 @@ class BinaryWeldedTree:
         for element in exeption_elements:
             if element in arr:
                 arr.remove(element)
-        return random.choice(arr)        
+        return random.choice(arr) 
+    
+    def get_node(self, key_node):
+        """Возвращает узел дерева по ключу"""
+        if self.flag == 0 or key_node > self.root_down.key:
+            return
+        if key_node <= self.root_down.key / 2:
+            root = self.root_up
+        else:
+            root = self.root_down
+        def iter(node):
+            
+            if node.key == key_node:
+                self.current = node
+                res = node
+            if node.left_color != None and node.right_color != None:
+                return #res
+            children = [node.left, node.right]
+            for child in children:
+                iter(child)
+        iter(root)
         
+        return self.current
+       
+    def get_path(self, color, value_color = 'min'):
+        
+        if self.flag == 0:
+            return        
+        def tree_traversal(root):
+            
+            res_dict = {}
+            def iter(node, count):
+                if node.left_color != None and node.right_color != None:
+                    res_dict.update({node.key: count})
+                    return
+            
+                if node.left.color == color:
+                    iter(node.left, count + 1)
+                else:
+                    iter(node.left, count)
+                if node.right.color == color:
+                    iter(node.right, count + 1)
+                else:
+                    iter(node.right, count)
+                    
+            iter(root, 0)
+            return res_dict
+        
+        dict_up = tree_traversal(self.root_up)
+        dict_down = tree_traversal(self.root_down)
+        
+        connection_leaves = {}
+        
+        for key_up, value in self.visual_leaves_up.items():
+            key_down_left = value['left']
+            if value['left_color'] == color:
+                color_value = 1
+            else:
+                color_value = 0
+            key_connect = '{0} - {1}'.format(key_up, key_down_left)
+            connection_leaves.update({key_connect: dict_up[key_up] + dict_down[key_down_left] + color_value})
+            
+            key_down_right = value['right']
+            if value['right_color'] == color:
+                color_value = 1
+            else:
+                color_value = 0
+            key_connect = '{0} - {1}'.format(key_up, key_down_right)
+            connection_leaves.update({key_connect: dict_up[key_up] + dict_down[key_down_right] + color_value}) 
+        
+        res = {}    
+        sorted_value = sorted(val for val in connection_leaves.values())
+        if value_color == 'max':
+            sorted_value.reverse()
+        for item in sorted_value:    
+            for key, value in connection_leaves.items():
+                if value == item:
+                    res.update({key: value})
+        return res
 
 tree = BinaryWeldedTree(3)
-#tree.getBWT(False)
-tree.getBWT()
+tree.getBWT(False)
+#tree.getBWT()
 print(tree.visual_form_up)
 print(tree.visual_form_down)
 tree.bind_trees()
@@ -250,5 +330,11 @@ tree.get_visual_leaves_up()
 print("visual_up :", tree.visual_leaves_up)
 tree.get_visual_leaves_down()
 print("visual_down :", tree.visual_leaves_down)
+#print(tree.tree_traversal(tree.root_up, 'red'))
+#print(tree.tree_traversal(tree.root_down, 'red'))
 
+print('\n max', tree.get_path('red', 'max'))
+print('\n min', tree.get_path('red'))
 
+print('\n key', tree.get_node(25).key)
+#print('current.key:', tree.current.key)
