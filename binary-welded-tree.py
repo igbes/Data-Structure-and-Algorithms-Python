@@ -319,7 +319,49 @@ class BinaryWeldedTree:
                 if value == item:
                     res.update({key: value})
         return res
-
+    
+    def get_wandering_search_1(self, key_node):
+        """Алгоритм случайного блуждания.
+        Возвращает количество шагов."""
+        
+        if self.flag == 0:
+            return
+        node = self.root_up
+        count = 0
+        while node is not key_node:
+            if node == self.root_up:
+                node = random.choice([node.left, node.right])
+            else:    
+                node = random.choice([node.parent, node.left, node.right])
+            count += 1
+        self.current = node    
+        return count    
+    
+    def get_wandering_search_2(self, any_node):
+        """Алгоритм случайного квантового блуждания.
+        Возвращает количество шагов."""
+        
+        if self.flag == 0:
+            return
+        #node = self.root_up
+        #list_node = [node]
+        list_node = [self.root_up]
+        count = 0
+        #while any_node in list_node == False:
+        for node in list_node:
+            #if count > 10000:
+            #    return
+            count += 1
+            print('node.key', node.key)
+            if node is any_node:
+                self.current = node
+                return count
+            if node == self.root_up:
+                list_node.append(random.choice([node.left, node.right]))
+            else:    
+                list_node.append(random.choice([node.parent, node.left, node.right]))
+            
+    
 tree = BinaryWeldedTree(3)
 tree.getBWT(False)
 #tree.getBWT()
@@ -334,7 +376,17 @@ print("visual_down :", tree.visual_leaves_down)
 #print(tree.tree_traversal(tree.root_down, 'red'))
 
 print('\n max', tree.get_path('red', 'max'))
+
 print('\n min', tree.get_path('red'))
 
-print('\n key', tree.get_node(25).key)
-#print('current.key:', tree.current.key)
+#print('\n key', tree.get_node(25).key)
+#node_f = tree.get_node(25)
+#print('\n node_f.key', node_f.key)
+#print('\n node_f.parent.key', node_f.parent.key)
+
+print('\n get_wandering_search_1()', tree.get_wandering_search_1(tree.root_down))
+print('\n current.key', tree.current.key)
+
+
+#print('\n get_wandering_search_2()', tree.get_wandering_search_2(tree.root_down))
+#print('\n current.key', tree.current.key)
