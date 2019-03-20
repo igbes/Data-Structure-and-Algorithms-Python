@@ -1,5 +1,6 @@
 import unittest
 import random
+import time
 
 class TreeNode:
     def __init__(self, key, parent):
@@ -343,16 +344,10 @@ class BinaryWeldedTree:
         
         if self.flag == 0:
             return
-        #node = self.root_up
-        #list_node = [node]
         list_node = [self.root_up]
         count = 0
-        #while any_node in list_node == False:
         for node in list_node:
-            #if count > 10000:
-            #    return
             count += 1
-            print('node.key', node.key)
             if node is any_node:
                 self.current = node
                 return count
@@ -384,9 +379,16 @@ print('\n min', tree.get_path('red'))
 #print('\n node_f.key', node_f.key)
 #print('\n node_f.parent.key', node_f.parent.key)
 
-print('\n get_wandering_search_1()', tree.get_wandering_search_1(tree.root_down))
-print('\n current.key', tree.current.key)
 
 
-#print('\n get_wandering_search_2()', tree.get_wandering_search_2(tree.root_down))
+a = time.time()  
+#print('\n get_wandering_search_1()', tree.get_wandering_search_1(tree.root_down))
+#b = time.time()
+#print('секунд :',b - a)
 #print('\n current.key', tree.current.key)
+
+a = time.time()  
+print('\n get_wandering_search_2()', tree.get_wandering_search_2(tree.root_down))
+b = time.time()
+print('секунд :',b - a)
+print('\n current.key', tree.current.key)
