@@ -345,20 +345,21 @@ class BinaryWeldedTree:
         if self.flag == 0:
             return
         
-        temp_list = []
-        list_node = [self.root_up]
+        temp_set = set()
+        set_node = {self.root_up}
         count = 0
         while True:
             count += 1
-            list_node.extend(temp_list)
-            for node in list_node:
+            set_node.update(temp_set)
+            #temp_set.clear()
+            for node in set_node:
                 if node is any_node:
                     self.current = node
                     return count
                 if node == self.root_up:
-                    temp_list.append(random.choice([node.left, node.right]))
+                    temp_set.add(random.choice([node.left, node.right]))
                 else:    
-                    temp_list.append(random.choice([node.parent, node.left, node.right]))
+                    temp_set.add(random.choice([node.parent, node.left, node.right]))
             
     
 tree = BinaryWeldedTree(3)
@@ -385,16 +386,44 @@ print('\n min', tree.get_path('red'))
 #print('\n node_f.parent.key', node_f.parent.key)
 
 
-
+"""
 a = time.time()  
 print('\n get_wandering_search_1()', tree.get_wandering_search_1(tree.root_down))
 b = time.time()
 print('секунд :',b - a)
-print('\n current.key', tree.current.key)
+#print('\n current.key', tree.current.key)
 
 a = time.time()  
 print('\n get_wandering_search_2()', tree.get_wandering_search_2(tree.root_down))
 b = time.time()
 print('секунд :',b - a)
-print('\n current.key', tree.current.key)
+#print('\n current.key', tree.current.key)
+"""
+def get_statistics_2(namber_launch):
+    i = 0
+    step_total = 0
+    while i < namber_launch:
+        step_namber = tree.get_wandering_search_2(tree.root_down)
+        if step_namber == None:
+            continue
+        step_total += step_namber
+        i += 1
+        print('i :', i)
+    return step_total    
 
+def get_statistics_1(namber_launch):
+    i = 0
+    step_total = 0
+    while i < namber_launch:
+        step_namber = tree.get_wandering_search_1(tree.root_down)
+        if step_namber == None:
+            continue
+        step_total += step_namber
+        i += 1
+        print('i :', i)
+    return step_total 
+
+a = time.time()
+print(get_statistics_1(1000))
+b = time.time()
+print('секунд :',b - a)
