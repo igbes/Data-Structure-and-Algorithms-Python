@@ -66,7 +66,6 @@ class LinkedList:
             if node is None:
                 return acc
             if node.value == val:
-                #acc.append(node.value)
                 acc.append(node)
             return iter(node.next, acc)    
         return iter(self.head, [])
