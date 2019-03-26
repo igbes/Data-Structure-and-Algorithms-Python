@@ -38,17 +38,20 @@ class LinkedList:
         """Удаляет один или все узлы по значению,
          по умолчанию удаляется первый нашедшийся элемент"""
         node = self.head
-        preNode = Node(None)
         prevNode = None
         while node is not None:
             if node.value == val:
+                # Если единственный элемент
+                if node is self.head and node is self.tail:
+                    self.head = None
+                    self.tail = None
+                    
                 # Если val в голове списка:
-                if node == self.head:
+                elif node is self.head:
                     self.head = node.next
-                    if all == False:
-                        return
+                                   
                 # Если val в конце списка:
-                elif node == self.tail:
+                elif node is self.tail:
                     # Если всего два элемента в списке:
                     if self.head is prevNode:
                         self.head.next = None
@@ -64,7 +67,7 @@ class LinkedList:
                     return
             else:
                 prevNode = node
-            node = node.next       
+            node = node.next
          
     #1.3    
     def clean(self):
