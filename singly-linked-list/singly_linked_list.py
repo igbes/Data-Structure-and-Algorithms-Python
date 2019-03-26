@@ -39,18 +39,32 @@ class LinkedList:
          по умолчанию удаляется первый нашедшийся элемент"""
         node = self.head
         preNode = Node(None)
+        prevNode = None
         while node is not None:
-            if node == self.head and node.value == val:
-                self.head = node.next
+            if node.value == val:
+                # Если val в голове списка:
+                if node == self.head:
+                    self.head = node.next
+                    if all == False:
+                        return
+                # Если val в конце списка:
+                elif node == self.tail:
+                    # Если всего два элемента в списке:
+                    if self.head is prevNode:
+                        self.head.next = None
+                        self.tail = None
+                    # Если больше, чем два элемента:    
+                    else:
+                        prevNode.next = None
+                        self.tail = prevNode
+                # Если val в середине списка: 
+                else:
+                    prevNode.next = node.next
                 if all == False:
                     return
-            elif node.value != val:
-                preNode = node
             else:
-                preNode.next = node.next
-                if all == False:
-                    return
-            node = node.next            
+                prevNode = node
+            node = node.next       
          
     #1.3    
     def clean(self):

@@ -58,7 +58,14 @@ class TestLinkedList(unittest.TestCase):
         self.list_test = LinkedList()
         self.list_test.add_in_tail(Node(12))
         self.list_test.delete(10)
-        self.assertEqual(get_list_nodes(self.list_test), [12])        
+        self.assertEqual(get_list_nodes(self.list_test), [12]) 
+        
+        self.list_test = LinkedList()
+        self.list_test.add_in_tail(Node(11))
+        self.list_test.add_in_tail(Node(12))
+        self.list_test.add_in_tail(Node(73))
+        self.list_test.delete(73)
+        self.assertEqual(get_list_nodes(self.list_test), [11, 12])        
         
     def test_clean(self):
         
@@ -125,4 +132,4 @@ class TestLinkedList(unittest.TestCase):
         self.assertEqual(sum_list(list_test_1, list_test_2), None)
         
 if __name__ == '__main__':
-    unittest.main() 
+    unittest.main()
