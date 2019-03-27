@@ -97,17 +97,24 @@ class TestLinkedList(unittest.TestCase):
         
     def test_insert(self):
         
-        self.list_test.insert(73, 1000) 
-        self.assertEqual(get_list_nodes(self.list_test), [12, 73, 1000, 73, 12, 73, 73])
+        node_1000 = Node(1000)
+        list_test = LinkedList()
+        list_test.insert(None, node_1000)        
+        self.assertEqual(get_list_nodes(list_test), [1000])
         
         list_test = LinkedList()
-        list_test.add_in_tail(Node(12))
-        list_test.insert(12, 1000)
+        node_12 = Node(12)
+        list_test.add_in_tail(node_12)
+        list_test.insert(node_12, node_1000)
         self.assertEqual(get_list_nodes(list_test), [12, 1000])
         
         list_test = LinkedList()
-        list_test.insert(None, 100)
-        self.assertEqual(get_list_nodes(list_test), [100])
+        node_12 = Node(12)
+        node_73 = Node(73)
+        list_test.add_in_tail(node_12)
+        list_test.add_in_tail(node_73)
+        list_test.insert(node_12, node_1000)
+        self.assertEqual(get_list_nodes(list_test), [12, 1000, 73])        
         
     def test_sum_list(self):
             
