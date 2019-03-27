@@ -106,7 +106,7 @@ class LinkedList:
             if node is None:
                 return
             if node.value == afterNode:
-                if node == self.tail:
+                if node is self.tail:
                     self.add_in_tail(Node(newNode))
                     return
                 new_node = Node(newNode)
