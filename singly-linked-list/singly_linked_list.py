@@ -98,12 +98,17 @@ class LinkedList:
     # 1.6
     def insert(self, afterNode, newNode):
         """Вставляет узел после заданного узла по значению"""
-        if self.head == None:
+        if self.head == None and afterNode == None:
             self.add_in_tail(Node(newNode))
+            return
+    
         def iter(node):
             if node is None:
                 return
             if node.value == afterNode:
+                if node == self.tail:
+                    self.add_in_tail(Node(newNode))
+                    return
                 new_node = Node(newNode)
                 temp = node.next
                 node.next = new_node
