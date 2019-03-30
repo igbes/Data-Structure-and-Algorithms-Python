@@ -2,18 +2,6 @@ import unittest
 from doubly_linked_list import Node
 from doubly_linked_list import LinkedList2
 
-# Дополнительное задание 1.8
-def sum_list(s1, s2):
-    """Если длины списков равны, возвращает список, каждый элемент которого равен сумме соответствующих элементов входных списков."""
-    if s1.len() != s2.len():
-        return 
-    def iter(node_1, node_2, acc):
-        if node_1 is None:
-            return acc
-        acc.append(node_1.value + node_2.value)
-        return iter(node_1.next, node_2.next, acc) 
-    return iter(s1.head, s2.head, [] )
-
 def get_list_nodes(item):
     """Вспомогательная функция для тестирования: возвращает список значений узлов (визуалицация списка)""" 
     def iter(node, acc):
@@ -77,7 +65,6 @@ class TestLinkedList(unittest.TestCase):
     def test_find_all(self):
         
         lst = self.list_test.find_all(12)
-        print('****', lst)
         list_value = [node.value for node in lst]
         self.assertEqual(list_value, [12, 12]) 
         
@@ -116,29 +103,21 @@ class TestLinkedList(unittest.TestCase):
         list_test.add_in_tail(node_12)
         list_test.add_in_tail(node_73)
         list_test.insert(node_12, node_1000)
-        self.assertEqual(get_list_nodes(list_test), [12, 1000, 73])        
+        self.assertEqual(get_list_nodes(list_test), [12, 1000, 73])
         
-    def test_sum_list(self):
-            
-        list_test_1 = LinkedList2()
-        list_test_1.add_in_tail(Node(12))
-        list_test_1.add_in_tail(Node(38))
-        list_test_1.add_in_tail(Node(12))
-        list_test_1.add_in_tail(Node(55))
-        list_test_2 = LinkedList2()
-        list_test_2.add_in_tail(Node(120))
-        list_test_2.add_in_tail(Node(550))
-        list_test_2.add_in_tail(Node(1280))
-        list_test_2.add_in_tail(Node(550))    
-            
-        self.assertEqual(sum_list(list_test_1, list_test_2), [132, 588, 1292, 605])
-                    
-        list_test_2 = LinkedList2()
-        list_test_2.add_in_tail(Node(120))
-        list_test_2.add_in_tail(Node(550))
-        list_test_2.add_in_tail(Node(1280))
-               
-        self.assertEqual(sum_list(list_test_1, list_test_2), None)
+        node_1000 = Node(1000)
+        node_10 = Node(10)
+        node_73 = Node(73)
+        node_12 = Node(12)        
+        lst = LinkedList2()
+        lst.add_in_tail(node_10)
+        lst.add_in_tail(node_12)
+        lst.insert(node_12, node_1000)
+        self.assertEqual(get_list_nodes(lst), [10, 12, 1000])
+        self.assertEqual(lst.head.next.next.value, 1000)
+        self.assertEqual(lst.tail.prev.value, 12)
+        self.assertEqual(lst.tail.next, None)
+        self.assertEqual(lst.tail.prev.next.value, 1000)
         
 if __name__ == '__main__':
     unittest.main()
