@@ -80,14 +80,13 @@ class TestLinkedList(unittest.TestCase):
     def test_len(self):
         
         self.assertEqual(self.list_test.len(), 6)
-        
         list_test = LinkedList2()
         self.assertEqual(list_test.len(), 0)
         
     def test_insert(self):
         
-        node_1000 = Node(1000)
         list_test = LinkedList2()
+        node_1000 = Node(1000)
         list_test.insert(None, node_1000)        
         self.assertEqual(get_list_nodes(list_test), [1000])
         self.assertEqual(list_test.tail.next, None)
@@ -99,17 +98,8 @@ class TestLinkedList(unittest.TestCase):
         
         list_test = LinkedList2()
         node_12 = Node(12)
-        list_test.add_in_tail(node_12)
-        list_test.insert(node_12, node_1000)
-        self.assertEqual(get_list_nodes(list_test), [12, 1000])
-        self.assertEqual(list_test.head.next.value, 1000)
-        self.assertEqual(list_test.tail.prev.value, 12)
-        self.assertEqual(list_test.tail.next, None)
-        self.assertEqual(list_test.tail.prev.next.value, 1000)        
-        
-        list_test = LinkedList2()
-        node_12 = Node(12)
         node_73 = Node(73)
+        node_1000 = Node(1000)
         list_test.add_in_tail(node_12)
         list_test.add_in_tail(node_73)
         list_test.insert(node_12, node_1000)
@@ -120,11 +110,21 @@ class TestLinkedList(unittest.TestCase):
         self.assertEqual(list_test.tail.next, None)
         self.assertEqual(list_test.tail.prev.next.value, 73)         
         
+        list_test = LinkedList2()
+        node_12 = Node(12)
+        node_1000 = Node(1000)
+        list_test.add_in_tail(node_12)
+        list_test.insert(node_12, node_1000)
+        self.assertEqual(get_list_nodes(list_test), [12, 1000])
+        self.assertEqual(list_test.head.next.value, 1000)
+        self.assertEqual(list_test.tail.prev.value, 12)
+        self.assertEqual(list_test.tail.next, None)
+        self.assertEqual(list_test.tail.prev.next.value, 1000)       
+        
+        lst = LinkedList2()
         node_1000 = Node(1000)
         node_10 = Node(10)
-        node_73 = Node(73)
         node_12 = Node(12)        
-        lst = LinkedList2()
         lst.add_in_tail(node_10)
         lst.add_in_tail(node_12)
         lst.insert(node_12, node_1000)
