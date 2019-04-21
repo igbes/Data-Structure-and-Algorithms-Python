@@ -25,7 +25,15 @@ class TestOrderedList(unittest.TestCase):
         self.o_list.add(2)        
         self.o_list.add(4)
         res = get_list_nodes(self.o_list)
-        self.assertEqual(res, [2, 4, 4, 6, 7, 10]) 
+        self.assertEqual(res, [2, 4, 4, 6, 7, 10])
+        self.assertEqual(self.o_list.get_all()[3].value, 6)
+        self.assertEqual(self.o_list.get_all()[-1].value, 10)
+        
+        self.o_list.add(1)
+        self.assertEqual(self.o_list.get_all()[0].value, 1)
+        res = get_list_nodes(self.o_list)
+        self.assertEqual(res, [1, 2, 4, 4, 6, 7, 10])
+      
         
         self.o_list = OrderedList(True)
         self.o_list.add(7)
@@ -35,8 +43,11 @@ class TestOrderedList(unittest.TestCase):
         self.o_list = OrderedList(True)
         self.o_list.add(8)
         self.o_list.add(7)
+        #print(self.o_list.get_all())
+        self.o_list.add(8)
+        #print(self.o_list.get_all())
         res = get_list_nodes(self.o_list)
-        self.assertEqual(res, [7, 8])          
+        self.assertEqual(res, [7, 8, 8])          
         
         self.o_list = OrderedList(False)
         self.o_list.add(7)
@@ -47,17 +58,22 @@ class TestOrderedList(unittest.TestCase):
         self.o_list.add(4)
         res = get_list_nodes(self.o_list)
         self.assertEqual(res, [10, 7, 6, 4, 4, 2]) 
+        self.assertEqual(self.o_list.get_all()[3].value, 4)
+        self.assertEqual(self.o_list.get_all()[-1].value, 2)        
+        
         
         self.o_list = OrderedList(False)
         self.o_list.add(7)
         res = get_list_nodes(self.o_list)
-        self.assertEqual(res, [7])    
+        self.assertEqual(res, [7])
+        self.assertEqual(self.o_list.get_all()[-1].value, 7)
         
         self.o_list = OrderedList(False)
         self.o_list.add(7)
         self.o_list.add(8)
         res = get_list_nodes(self.o_list)
-        self.assertEqual(res, [8, 7])  
+        self.assertEqual(res, [8, 7]) 
+        self.assertEqual(self.o_list.get_all()[-1].value, 7)
         
     def test_find(self):
         

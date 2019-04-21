@@ -37,7 +37,7 @@ class OrderedList:
                     return
                 if node is afterNode:
                     if node is self.tail:
-                        self.add_in_tail(newNode)
+                        add_in_tail(newNode)
                         return                
                     temp = node.next
                     node.next = newNode
@@ -86,9 +86,12 @@ class OrderedList:
             
         node = self.head
         while True:
-            if self.compare(node.value, new_node.value) == -1 and self.compare(new_node.value, node.next.value) == -1 or self.compare(node.value, new_node.value) == 0:
+            if self.compare(node.value, new_node.value) == -1 and self.compare(new_node.value, node.next.value) == -1:
                 # вставить после node
                 insert(node, new_node)
+                return
+            if self.compare(node.value, new_node.value) == 0:
+                insert(node.prev, new_node)
                 return
             node = node.next
        
