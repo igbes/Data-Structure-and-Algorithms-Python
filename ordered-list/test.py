@@ -4,7 +4,7 @@ from ordered_list import OrderedList
 from ordered_list import OrderedStringList
 
 def get_list_nodes(item):
-    """Получить список узлов (вспомогательная функция для тестирования)"""
+    """Получить список значений узлов (вспомогательная функция для тестирования)"""
     def iter(node, acc):
         if node is None:
             return acc
@@ -38,14 +38,20 @@ class TestOrderedList(unittest.TestCase):
         self.o_list = OrderedList(True)
         self.o_list.add(7)
         res = get_list_nodes(self.o_list)
-        self.assertEqual(res, [7])    
+        self.assertEqual(res, [7])
+        
+        self.o_list = OrderedList(True)
+        self.o_list.add(10)
+        self.o_list.add(8)
+        self.o_list.add(9)
+        self.o_list.add(7)
+        res = get_list_nodes(self.o_list)
+        self.assertEqual(res, [7, 8, 9, 10])
         
         self.o_list = OrderedList(True)
         self.o_list.add(8)
         self.o_list.add(7)
-        #print(self.o_list.get_all())
         self.o_list.add(8)
-        #print(self.o_list.get_all())
         res = get_list_nodes(self.o_list)
         self.assertEqual(res, [7, 8, 8])          
         
@@ -114,6 +120,11 @@ class TestOrderedStringList(unittest.TestCase):
         self.o_list_str.add("  aa")
         res = get_list_nodes(self.o_list_str)
         self.assertEqual(res, ["  aa", "ab", "ad", "ae"])
+        
+        self.o_list_str = OrderedStringList(True)
+        self.o_list_str.add("ab")
+        res = get_list_nodes(self.o_list_str)
+        self.assertEqual(res, ["ab"])        
         
         self.o_list_str = OrderedStringList(False)
         self.o_list_str.add("ab")
