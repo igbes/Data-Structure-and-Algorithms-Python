@@ -27,7 +27,8 @@ class HashTable:
         slot_number = self.seek_slot(value)
         if slot_number != None:
             self.slots[slot_number] = value
-            return
+            return slot_number
+        return None
         
     def find(self, value):
         """Возвращает индекс слота с искомым значением или None"""
@@ -38,8 +39,4 @@ class HashTable:
             if self.slots[slot] == value:
                 return slot            
             slot += self.step
-        pass
-                   
-    """def show_hashtable(self):
-        # Показывает хеш-таблицу в виде массива (вспомогательная функция)
-        return self.slots"""
+    
