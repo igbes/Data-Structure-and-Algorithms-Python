@@ -28,9 +28,10 @@ class TestPowerSet(unittest.TestCase):
         self.assertEqual(show_hashtable(self.set_1), [None, 'dE', None, 'eD', 'AA', None, None])
       
     def test_put(self):
+        self.set_2.put("AA")
         self.set_1.put("Bc")
-        self.set_1.put("Bc")
-        self.assertEqual(show_hashtable(self.set_1), ['Bc', 'dE', None, 'eD', 'AA', None, None])
+        self.set_1.put("dE")
+        self.assertEqual(self.set_1.slots, ['Bc', 'dE', None, 'eD', 'AA', None, None])
        
     def test_intersection(self):
         self.assertEqual(show_hashtable(self.set_1.intersection(self.set_2)), [None, 'dE', None, None, 'AA', None, None]) 

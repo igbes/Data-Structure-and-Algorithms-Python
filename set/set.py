@@ -45,10 +45,13 @@ class PowerSet:
     
     def put(self, value):
         """Записывает значение по хэш-функции"""
-        if not self.get(value): 
+        if not self.get(value): # если value отсутствует в множестве
             slot_number = self.seek_slot(value)
-            if slot_number != None:
+            if slot_number != None: # если слот не занят из-за коллизий
                 self.slots[slot_number] = value
+                return slot_number
+            return None
+        return None
             
     def get(self, value):
         """Возвращает True если value имеется в множестве, иначе False"""
