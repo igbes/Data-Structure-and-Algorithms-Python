@@ -1,9 +1,9 @@
 
 class PowerSet:
     
-    def __init__(self, sz, stp):
-        self.sz = sz
-        self.step = stp
+    def __init__(self):
+        self.sz = 7
+        self.step = 3
         self.slots = [None] * self.sz
     
     def size(self):
@@ -45,7 +45,7 @@ class PowerSet:
     
     def put(self, value):
         """Записывает значение по хэш-функции"""
-        if self.get(value) == False: 
+        if not self.get(value): 
             slot_number = self.seek_slot(value)
             if slot_number != None:
                 self.slots[slot_number] = value
@@ -72,7 +72,7 @@ class PowerSet:
            
     def intersection(self, set2):
         """Возвращает пересечение текущего множества и set2"""
-        new_set = PowerSet(self.sz, self.step)
+        new_set = PowerSet()
         flag = 0
         for i in self.slots:
             if i == None:
@@ -90,7 +90,9 @@ class PowerSet:
         
     def union(self, set2):
         """Возвращает объединение текущего множества и set2"""
-        new_set = PowerSet((self.sz + set2.sz), self.step)
+        new_set = PowerSet()
+        new_set.sz = self.sz + set2.sz
+        new_set.slots = [None] * new_set.sz
         flag = 0
         for i in self.slots:
             if i == None:
@@ -108,7 +110,9 @@ class PowerSet:
                     
     def difference(self, set2):
         """Возвращает разницу текущего множества и set2"""
-        new_set = PowerSet((self.sz + set2.sz), self.step)
+        new_set = PowerSet()
+        new_set.sz = self.sz + set2.sz
+        new_set.slots = [None] * new_set.sz        
         union = self.union(set2)
         intersection = self.intersection(set2)
         flag = 0

@@ -8,13 +8,13 @@ def show_hashtable(my_set):
 class TestPowerSet(unittest.TestCase):
     
     def setUp(self):
-        self.set_1 = PowerSet(7, 3)
+        self.set_1 = PowerSet()
         self.set_1.put("AA") 
         self.set_1.put("Bc")
         self.set_1.put("dE")
         self.set_1.put("eD")
                 
-        self.set_2 = PowerSet(5, 3)
+        self.set_2 = PowerSet()
         self.set_2.put("AA") 
         self.set_2.put("BB")
         self.set_2.put("dE")
@@ -37,16 +37,16 @@ class TestPowerSet(unittest.TestCase):
         
     def test_union(self):
         self.assertEqual(show_hashtable(self.set_1.union(self.set_2)), 
-            ['BB', 'dE', None, None, 'eD', None, None, 'DD', None, 'Bc', 'AA', None]) 
+            [None, 'dE', None, None, 'eD', None, 'BB', 'AA', None, None, 'DD', 'Bc', None, None])        
         
     def test_difference(self):
         self.assertEqual(show_hashtable(self.set_1.difference(self.set_2)), 
-            ['BB', 'eD', None, None, 'DD', None, None, None, None, 'Bc', None, None])
+            [None, 'eD', None, None, None, None, 'BB', None, None, None, 'DD', 'Bc', None, None])        
             
     def test_issubset(self):
         self.assertEqual(self.set_1.issubset(self.set_2), False)
         
-        self.set_3 = PowerSet(5, 3)
+        self.set_3 = PowerSet()
         self.set_3.put("AA") 
         self.set_3.put("dE")
         self.assertEqual(self.set_1.issubset(self.set_3), True)       
