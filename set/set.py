@@ -13,35 +13,6 @@ class PowerSet:
             if element != None:
                 res += 1
         return res
-        
-    def hash_fun(self, value):
-        """Принимает в квчестве аргумента строку, возвращает индекс слота"""
-        sum_code = 0
-        for simbol in value:
-            sum_code += ord(simbol)
-        return sum_code % self.sz
-    
-    def seek_slot(self, value):
-        """Возвращает индекс пустого слота или None"""
-        slot = self.hash_fun(value)
-        for i in range(0, self.sz * self.step):
-            if slot > self.sz - 1:
-                slot = slot - self.sz
-            if self.slots[slot] == None:
-                return slot            
-            slot += self.step
-    
-    def find(self, value):
-        """Возвращает индекс слота с искомым значением или None"""
-        slot = self.hash_fun(value)
-        for i in range(0, self.sz * self.step):
-            if slot > self.sz - 1:
-                slot = slot - self.sz
-            if self.slots[slot] == None:
-                return                 
-            if self.slots[slot] == value:
-                return slot            
-            slot += self.step      
     
     def put(self, value):
         """Записывает значение по хэш-функции"""
@@ -52,7 +23,7 @@ class PowerSet:
                 return slot_number
             return None
         return None
-            
+    
     def get(self, value):
         """Возвращает True если value имеется в множестве, иначе False"""
         slot = self.hash_fun(value)
@@ -62,17 +33,17 @@ class PowerSet:
             if self.slots[slot] == None:
                 return False                
             if self.slots[slot] == value:
-                return True                
-            slot += self.step    
-     
+                return True                    
+            slot += self.step   
+    
     def remove(self, value):
         """Возвращает True если value удалено"""
         slot = self.find(value)
         if slot != None:
             self.slots[slot] = None
-            return True
+            return True        
         return False
-           
+    
     def intersection(self, set2):
         """Возвращает пересечение текущего множества и set2"""
         new_set = PowerSet()
@@ -139,4 +110,32 @@ class PowerSet:
             if not self.get(i):
                 return False
         return True
-        
+     
+    def hash_fun(self, value):
+        """Принимает в квчестве аргумента строку, возвращает индекс слота"""
+        sum_code = 0
+        for simbol in value:
+            sum_code += ord(simbol)
+        return sum_code % self.sz
+    
+    def seek_slot(self, value):
+        """Возвращает индекс пустого слота или None"""
+        slot = self.hash_fun(value)
+        for i in range(0, self.sz * self.step):
+            if slot > self.sz - 1:
+                slot = slot - self.sz
+            if self.slots[slot] == None:
+                return slot            
+            slot += self.step
+    
+    def find(self, value):
+        """Возвращает индекс слота с искомым значением или None"""
+        slot = self.hash_fun(value)
+        for i in range(0, self.sz * self.step):
+            if slot > self.sz - 1:
+                slot = slot - self.sz
+            if self.slots[slot] == None:
+                return                 
+            if self.slots[slot] == value:
+                return slot            
+            slot += self.step         
