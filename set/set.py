@@ -45,19 +45,17 @@ class PowerSet:
     def intersection(self, set2):
         """Возвращает пересечение текущего множества и set2"""
         res = PowerSet()
-        #res = []
-        flag = 0
+        #flag = 0
         arr_set1 = self.flatten(self.slots)
         arr_set2 = self.flatten(set2.slots)
-        for element_1 in arr_set1:
-            for element_2 in arr_set2:
-                if element_1 == element_2:
-                    #res.append(element_1)
-                    res.put(element_1)
-                    flag += 1
-        if flag > 0:            
-            return res            
-        return None    
+        for element in arr_set1:
+            if element in arr_set2:
+                res.put(element)
+                #flag += 1
+        #if flag > 0:
+        #    return res 
+        #return None  
+        return res
         
     def union(self, set2):
         """Возвращает объединение текущего множества и set2"""

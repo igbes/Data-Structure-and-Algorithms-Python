@@ -43,7 +43,16 @@ class TestPowerSet(unittest.TestCase):
       
     def test_intersection(self):
         self.assertEqual(self.set_1.intersection(self.set_2).slots, 
-                         [None, ['dE'], None, None, ['AA'], None, None]) 
+                         [None, ['dE'], None, None, ['AA'], None, None])
+        
+        self.set_2 = PowerSet()
+        self.set_2.put('EE') 
+        self.set_2.put('DD')
+        self.assertEqual(self.set_1.intersection(self.set_2).slots, 
+                         [None, None, None, None, None, None, None])
+        
+        #self.set_2 = PowerSet()
+        #self.assertEqual(self.set_1.intersection(self.set_2), None)
         
     def test_union(self):
         self.assertEqual(self.set_1.union(self.set_2).slots, 
