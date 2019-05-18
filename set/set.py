@@ -60,19 +60,11 @@ class PowerSet:
     def union(self, set2):
         """Возвращает объединение текущего множества и set2"""
         res_set = PowerSet()
-        res = []
-        flag = 0
         arr_set1 = self.flatten(self.slots)
-        arr_set2 = self.flatten(set2.slots)      
-        for element in arr_set1:
-            if not element in arr_set2:
-                res.append(element)
-                flag += 1
-        if flag > 0:
-            for elem in arr_set2 + res:
-                res_set.put(elem)
-            return res_set
-        return None
+        arr_set2 = self.flatten(set2.slots)
+        for element in arr_set1 + arr_set2:
+            res_set.put(element)
+        return res_set
     
     def difference(self, set2):
         """Возвращает разницу текущего множества и set2"""
@@ -84,10 +76,10 @@ class PowerSet:
         for element in arr_set1:
             if not element in arr_set2:
                 res_set.put(element)
-                flag += 1
-        if flag > 0:
-            return res_set
-        return None
+                #flag += 1
+        #if flag > 0:
+        #    return res_set
+        return res_set
     
     def issubset(self, set2):
         """Возвращает True, если set2 есть

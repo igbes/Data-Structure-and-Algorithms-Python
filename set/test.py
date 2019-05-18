@@ -51,12 +51,27 @@ class TestPowerSet(unittest.TestCase):
         self.assertEqual(self.set_1.intersection(self.set_2).slots, 
                          [None, None, None, None, None, None, None])
         
-        #self.set_2 = PowerSet()
-        #self.assertEqual(self.set_1.intersection(self.set_2), None)
+        self.set_2 = PowerSet()
+        self.assertEqual(self.set_1.intersection(self.set_2).slots, 
+                         [None, None, None, None, None, None, None])
         
     def test_union(self):
         self.assertEqual(self.set_1.union(self.set_2).slots, 
-            [None, ['dE', 'eD'], None, ['DD'], ['AA', 'Bc'], None, ['BB']])         
+            [None, ['dE', 'eD'], None, ['DD'], ['AA', 'Bc'], None, ['BB']]) 
+        
+        self.set_2 = PowerSet()
+        self.assertEqual(self.set_1.union(self.set_2).slots, 
+            [None, ['dE', 'eD'], None, None, ['AA', 'Bc'], None, None])
+        
+        self.set_1 = PowerSet()
+        
+        self.set_2 = PowerSet()
+        self.set_2.put("AA") 
+        self.set_2.put("Bc")
+        self.set_2.put("dE")
+        self.set_2.put("eD")  
+        self.assertEqual(self.set_1.union(self.set_2).slots, 
+            [None, ['dE', 'eD'], None, None, ['AA', 'Bc'], None, None])        
         
     def test_difference(self):
         self.assertEqual(self.set_1.difference(self.set_2).slots, 
