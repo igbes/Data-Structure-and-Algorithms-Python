@@ -10,8 +10,8 @@ class SimpleTree:
     def __init__(self, root):
         self.root = root
         self.current = root
-        self.__number_node = 1
-        self.__leaf_number = 0
+        self.__number_node = None
+        self.__leaf_number = None
                 
     def AddChild(self, ParentNode, NewChild):
         """Добавляет текущему узлу новый узел в качестве дочернего"""
@@ -61,6 +61,7 @@ class SimpleTree:
         
     def Count(self):
         """Возвращает количество всех узлов в дереве"""
+        self.__number_node = 0
         def iter(node):
             self.__number_node += 1
             if node.Children:
@@ -71,6 +72,7 @@ class SimpleTree:
         
     def LeafCount(self):
         """Возвращает количество листьев в дереве"""
+        self.__leaf_number = 0
         def iter(node):
             if node.Children:
                 for child in node.Children:
