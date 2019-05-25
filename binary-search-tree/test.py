@@ -70,6 +70,39 @@ class TestBST(unittest.TestCase):
     def test_Count(self):
         # проверка подсчёта количества узлов дерева
         self.assertEqual(self.tree.Count(), 15)
+        self.tree = BST(BSTNode(8, 80, None))
+        self.assertEqual(self.tree.Count(), 1)
+        
+    # проверка обходов дерева в глубину ------------------------------------------
+        
+    def test_DeepAllNodes(self):
+        # проверка in-order
+        self.assertEqual([node.NodeKey for node in list(self.tree.DeepAllNodes(0))], 
+                         [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15])
+        self.tree = BST(BSTNode(8, 80, None))
+        self.assertEqual([node.NodeKey for node in list(self.tree.DeepAllNodes(0))], [8]) 
+        
+    def test_DeepAllNodes(self):
+        # проверка post-order
+        self.assertEqual([node.NodeKey for node in list(self.tree.DeepAllNodes(1))], 
+                         [1, 3, 2, 5, 7, 6, 4, 9, 11, 10, 13, 15, 14, 12, 8])
+        self.tree = BST(BSTNode(8, 80, None))
+        self.assertEqual([node.NodeKey for node in list(self.tree.DeepAllNodes(0))], [8])        
+                         
+    def test_DeepAllNodes(self):
+        # проверка pre-order
+        self.assertEqual([node.NodeKey for node in list(self.tree.DeepAllNodes(2))], 
+                         [8, 4, 2, 1, 3, 6, 5, 7, 12, 10, 9, 11, 14, 13, 15]) 
+        self.tree = BST(BSTNode(8, 80, None))
+        self.assertEqual([node.NodeKey for node in list(self.tree.DeepAllNodes(0))], [8])        
+    
+    # проверка обхода дерева в ширину --------------------------------------------
+                         
+    def test_WideAllNodes(self):
+        self.assertEqual([node.NodeKey for node in list(self.tree.WideAllNodes())], 
+                         [8, 4, 12, 2, 6, 10, 14, 1, 3, 5, 7, 9, 11, 13, 15])
+        self.tree = BST(BSTNode(8, 80, None))
+        self.assertEqual([node.NodeKey for node in list(self.tree.DeepAllNodes(0))], [8])        
         
 if __name__ == '__main__':
     unittest.main()  

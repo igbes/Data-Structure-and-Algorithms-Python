@@ -128,5 +128,40 @@ class BST:
             if node.RightChild is not None:
                 iter(node.RightChild, lst)
             return lst
-        return iter(self.Root, [])        
-        
+        return iter(self.Root, [])  
+    
+    def WideAllNodes(self):
+        """BFS - Breadth First Search / обход в ширину"""
+        def iter(node_list, acc):
+            if not node_list:
+                return tuple(acc)
+            lst = node_list[:]          
+            for node in node_list:
+                lst.remove(node)
+                if node.LeftChild is not None:
+                    lst.append(node.LeftChild)
+                if node.RightChild is not None:
+                    lst.append(node.RightChild)
+            return iter(lst, acc + lst)
+        return iter([self.Root], [self.Root])        
+    
+    def DeepAllNodes(self, order):
+        """DFS - Depth First Search / обход в глубину
+        order=0 - симметричный порядок обхода (in-order),
+        order=1 - post-order 
+        order=2 - pre-order"""
+        lst = []
+        def iter(node):
+            if node is None:
+                #print(lst)
+                return #tuple(lst)
+            if order == 2:
+                lst.append(node)
+            iter(node.LeftChild)
+            if order == 0:
+                lst.append(node)
+            iter(node.RightChild)
+            if order == 1:
+                lst.append(node)
+        iter(self.Root)    
+        return tuple(lst)    
