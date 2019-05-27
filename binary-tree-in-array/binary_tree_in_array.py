@@ -45,14 +45,14 @@ class aBST:
             if key < self.Tree[index]:
                 if self.Tree[2 * index + 1] == None:
                     self.Tree[2 * index + 1] = key
-                    return 
+                    return index
                 else:       
                     return iter(2 * index + 1, level + 1)
             else:
                 if key > self.Tree[index]:
                     if self.Tree[2 * index + 2] == None:
                         self.Tree[2 * index + 2] = key
-                        return 
+                        return index
                     else:       
                         return iter(2 * index + 2, level + 1)                 
         return iter(0, 0) 
