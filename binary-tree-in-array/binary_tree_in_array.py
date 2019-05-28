@@ -36,10 +36,12 @@ class aBST:
     
     def AddKey(self, key):
         def iter(index, current_depth):
-            if current_depth > self.depth or self.Tree[index] == key:
+            if current_depth > self.depth:
                 return -1
             if self.Tree[index] == None:
                 self.Tree[index] = key
+                return index
+            if self.Tree[index] == key:
                 return index
             if key < self.Tree[index]:
                 return iter(2 * index + 1, current_depth + 1)

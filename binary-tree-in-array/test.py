@@ -28,7 +28,8 @@ class TestaBST(unittest.TestCase):
         self.assertEqual(self.tree2.AddKey(23), 3)
         
         # проверка вставки уже существующего ключа:
-        self.assertEqual(self.tree2.AddKey(75), -1)
+        self.assertEqual(self.tree2.AddKey(75), 2)
+        self.assertEqual(self.tree2.AddKey(84), 6)
         
         # проверка вставки ключа за пределом заданной глубины дерева:
         self.assertEqual(self.tree2.AddKey(100), -1)
