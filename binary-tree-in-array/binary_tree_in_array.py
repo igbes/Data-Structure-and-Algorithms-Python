@@ -19,41 +19,31 @@ class aBST:
         Возвращает None, если значение не найдено и достигнут предел по глубине,
         возвращает -index, если на месте предполагаемого нахождения искомого 
         елемента находится None"""
-        def iter(index, level):
+        def iter(index, current_depth):
             if key == self.Tree[index]: 
                 return index
-            if level == self.depth:
+            if current_depth == self.depth:
                 return 
             if key < self.Tree[index]:
                 if self.Tree[2 * index + 1] == None:
                     return - (2 * index + 1)
-                return iter(2 * index + 1, level + 1)
+                return iter(2 * index + 1, current_depth + 1)
             else:
                 if self.Tree[2 * index + 2] == None:
                     return - (2 * index + 2)
-                return iter(2 * index + 2, level + 1)
+                return iter(2 * index + 2, current_depth + 1)
         return iter(0, 0) 
     
     def AddKey(self, key):
-        """Добавление узла в дерево"""
-        if self.Tree[0] == None:
-            self.Tree[0] = key
-            return 0
-        def iter(index, level):
-            if level == self.depth:
-                return -1           
+        def iter(index, current_depth):
+            if current_depth > self.depth or self.Tree[index] == key:
+                return -1
+            if self.Tree[index] == None:
+                self.Tree[index] = key
+                return index
             if key < self.Tree[index]:
-                if self.Tree[2 * index + 1] == None:
-                    self.Tree[2 * index + 1] = key
-                    return index
-                else:       
-                    return iter(2 * index + 1, level + 1)
-            else:
-                if key > self.Tree[index]:
-                    if self.Tree[2 * index + 2] == None:
-                        self.Tree[2 * index + 2] = key
-                        return index
-                    else:       
-                        return iter(2 * index + 2, level + 1)                 
-        return iter(0, 0) 
-    
+                return iter(2 * index + 1, current_depth + 1)
+            if key > self.Tree[index]:
+                return iter(2 * index + 2, current_depth + 1)
+        return iter(0, 0)
+        
